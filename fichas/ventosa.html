@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Manutenção Preventiva</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #000;
+            max-width: 800px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            background-color: #004080;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: white;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .cabecalho-cor {
+            background-color: #004080;
+            color: white;
+        }
+        .signature {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .signature div {
+            margin-top: 40px;
+            border-top: 2px solid black;
+            display: inline-block;
+            width: 300px;
+            padding-top: 5px;
+        }
+        .observations {
+            margin-top: 20px;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #004080;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #002d5f;
+        }
+    </style>
+</head>
+<body>
+    <div id="ficha">
+        <h1>Manutenção da Ventosa</h1>
+        
+        <div class="form-group">
+            <label>Técnico Responsável:</label>
+            <input type="text" id="tecnico">
+        </div>
+        <div class="form-group">
+            <label>Matrícula:</label>
+            <input type="text" id="matricula">
+        </div>
+        
+        <div class="form-group">
+            <label>Local:</label>
+            <input type="text" id="local">
+        </div>
+        <div class="form-group">
+            <label>Número de Série:</label>
+            <input type="text" id="serie">
+        </div>
+       
+        <div class="form-group">
+            <label>Data Realizada:</label>
+            <input type="date" id="data">
+        </div>
+        
+        <h2>Checklist de Manutenção</h2>
+        <table>
+            <tr>
+                <th class="cabecalho-cor">Trimestral</th>
+                <th class="cabecalho-cor">Condição</th>
+            </tr>
+            <tr>
+                <td>Verificar o estado das ventosas, cortes, trincas e deformações</td>
+                <td><input type="checkbox" class="checklist"></td>
+            </tr>
+            <tr>
+                <td>Verificar vedações das conexões</td>
+                <td><input type="checkbox" class="checklist"></td>
+            </tr>
+            <tr>
+                <td>Verificar/reapertar parafusos e porcas de fixação</td>
+                <td><input type="checkbox" class="checklist"></td>
+            </tr>
+            <tr>
+                <td>Trocar oleo da bba de vacuo-utilizar oleo hidráulico ISO 32 de 300 a 500 ml</td>
+                <td><input type="checkbox" class="checklist"></td>
+            </tr>
+            <tr>
+                <td>Lubrificar eixo central-Utilizar graxa a base de litio.</td>
+                <td><input type="checkbox" class="checklist"></td>
+            </tr>
+            <tr>
+                <td>Verificar mangueiras, furos, trincas, deformações e outras degradações</td>
+                <td><input type="checkbox" class="checklist"></td>
+            </tr>
+            <tr>
+                <td>Efetuar teste de estanqueidade: Limpar a ventosa e o vidro, onde as partes estarão em contato. Ligar a bomba de vacuo, encostar as ventosas no vidro e aguardar o sistema gerar 650 mmhg(Vacuômetro). Desligar a bomba de vácuo e observar se o ponteiro do vacuômetro se movimenta em sentido horário. Se isto estiver ocorrendo, existe infiltração e o equipamento não poderá ser utilizado.</td>
+                <td><input type="checkbox" class="checklist"></td>
+            </tr>
+        </table>
+        
+        <div class="observations">
+            <label>Observações:</label>
+            <textarea id="observacoes"></textarea>
+        </div>
+        
+        <div class="signature">
+            <div>Assinatura do Supervisor</div>
+        </div>
+    </div>
+    
+    <div class="btn-container">
+        <button onclick="gerarPDF()">Gerar PDF</button>
+    </div>
+
+    <script>
+        function gerarPDF() {
+            html2canvas(document.getElementById('ficha')).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'mm', 'a4');
+                doc.addImage(imgData, 'PNG', 10, 10, 190, 0);
+                doc.save("Ficha_Manutencao.pdf");
+            });
+        }
+    </script>
+</body>
+</html>
