@@ -10,8 +10,9 @@ body {
 }
 h1 {
     font-size: 90px;
-    margin-left: 30px;
     color: white;
+    text-align: center;
+    margin-bottom: 20px;
 }
 .header {
     margin: 0px;
@@ -21,7 +22,8 @@ h1 {
     background-color: #1E3A8A;
     width: 100%;
 }
-.header-titulo{ font-size: 60px;
+.header-titulo{ 
+    font-size: 60px;
 
 }
 
@@ -39,9 +41,11 @@ h1 {
     background-color: #00000006;
     width: 400px;
     margin: 20px auto;
+    margin-bottom: 30px;
     border-radius: 20px;
     padding: 5px 10px;
     color: #4b4b4b;
+
 }
 #searchInput{
     padding: 8px;
@@ -54,6 +58,7 @@ h1 {
 }
 .search label {
     height: 20px;
+    
 }
 .card-container {
     display: flex;
@@ -234,6 +239,7 @@ h1 {
         .search{
             
             width: 300px;
+            margin-bottom: 30px;
             
         }
 }
